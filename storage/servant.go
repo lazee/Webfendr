@@ -19,7 +19,7 @@ func FileHandler(cfg *config.Config) gin.HandlerFunc {
 		uri := extractUri(ctx)
 
 		log.Debug("Servant: siteHost: ", siteHost, ", uri: ", uri)
-		// Support front page for Webster itself, when direct request to webfendr domain
+		// Support front page for Webfendr itself, when direct request to webfendr domain
 		if ctx.Request.Host == cfg.WebFendrHost && uri == "/index.html" {
 			ctx.HTML(http.StatusOK, "webfendr.html", gin.H{
 				"domains": authenticator.FindDomains(cfg),
