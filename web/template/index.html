@@ -5,7 +5,7 @@
     {{if .authenticated}}
     <div class="p-5 text-center bg-body-tertiary rounded-3">
         <p>
-            <img class="avatar" src="{{.profile.picture}}"/>
+            <img class="avatar" src="{{.profile.picture}}" alt="avatar"/>
         </p>
         <h1 class="text-body-emphasis">{{ .profile.name }}</h1>
         <p class="col-lg-8 mx-auto fs-5 my-5">
@@ -20,7 +20,7 @@
     {{else}}
     <div class="p-5 text-center bg-body-tertiary rounded-3">
         <p>
-            <img src="/webfendr/public/image/webfendr.png" width="200"/>
+            <img src="/webfendr/public/image/webfendr.png" width="200" alt="logo"/>
         </p>
         <p class="col-lg-8 mx-auto fs-5 my-5">
             WebFendr is a tiny proxy server that puts different static sites behind a login. You are seeing this
