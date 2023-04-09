@@ -1,0 +1,8 @@
+main
+vendor/
+main-amd64
+tmp
+.env
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/shelf

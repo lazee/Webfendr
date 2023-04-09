@@ -1,0 +1,22 @@
+<html lang="en" data-bs-theme="dark">
+{{ template "header.html" .}}
+<body class="home">
+<div class="container my-5">
+    <div class="p-5 text-center bg-body-tertiary rounded-3">
+        <p>
+            <img src="/webfendr/public/image/webster.png" width="200"/>
+        </p>
+        <p class="col-lg-12 mx-auto fs-5 my-5">
+            Webfendr is a service for serving static web sites that requires users to authenticate to get access.
+            Each of the served sites have their own domain registered. These are the sites currently hosted by WebFendr:
+        </p>
+        {{range .domains}}
+        <div class="d-grid gap-3 my-5">
+            <a class="btn btn-primary btn-lg btn-block" type="button" href="{{.}}">{{.}}</a>
+        </div>
+        {{end}}
+    </div>
+
+</div>
+</body>
+</html>

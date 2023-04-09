@@ -1,0 +1,41 @@
+<html lang="en" data-bs-theme="dark">
+{{ template "header.html" .}}
+<body class="home">
+<div class="container my-5">
+    {{if .authenticated}}
+    <div class="p-5 text-center bg-body-tertiary rounded-3">
+        <p>
+            <img class="avatar" src="{{.profile.picture}}"/>
+        </p>
+        <h1 class="text-body-emphasis">You are logged in as {{ .profile.name }}</h1>
+        <p class="col-lg-8 mx-auto fs-5 text-muted">
+            You are logged into the WebFendr proxy, that serves various sites.
+        </p>
+        <div class="d-inline-flex gap-2 mb-5">
+            <a id="qsLogoutBtn"
+               class="d-inline-flex align-items-center btn btn-primary btn-lg btn-logout px-4 rounded-pill"
+               type="button" href="/webfendr/logout">
+                Logout
+            </a>
+        </div>
+    </div>
+    {{else}}
+    <div class="p-5 text-center bg-body-tertiary rounded-3">
+        <p>
+            <img src="/webfendr/public/image/webster.png" width="200"/>
+        </p>
+        <p class="col-lg-8 mx-auto fs-5 text-muted my-5">
+            WebFendr is a tiny proxy server that puts different static sites behind a login. You are seeing this
+            page as you probably have accessed WebFendr directly. Normally you should be taken directly to the login
+            page for the requested site.
+        </p>
+        <div class="d-inline-flex gap-2 mb-10">
+            <a id="qsSigninBtn" class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill"
+               type="button" href="/webfendr/login">Click here to login</a>
+        </div>
+    </div>
+    {{end}}
+
+</div>
+</body>
+</html>

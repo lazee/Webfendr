@@ -1,0 +1,6 @@
+main
+vendor/
+main-amd64
+tmp
+.env
+README.md
