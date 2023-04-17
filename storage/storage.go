@@ -199,6 +199,14 @@ func Syncer(ctx context.Context, cfg *config.Config) {
 		log.Panicf("Missing GOOGLE_STORAGE_BUCKET")
 	}
 	bucket := cli.Bucket(cfg.GoogleStorageSyncBucket)
+
+	// Run initially at startup before ticking
+	err = run(ctx, cfg, bucket)
+	if err != nil {
+		log.Error(err)
+	}
+
+	// Start ticking
 	t := time.Tick(time.Duration(cfg.GoogleStorageSyncInterval) * time.Second)
 	for {
 		select {
