@@ -35,10 +35,12 @@ func FileHandler(cfg *config.Config) gin.HandlerFunc {
 			return
 		}
 		fileReader := bufio.NewReader(file)
+		mimeType := detectMime(filePath)
+		log.Info("mimetype", mimeType)
 		ctx.DataFromReader(
 			http.StatusOK,
 			-1,
-			detectMime(filePath),
+			mimeType,
 			fileReader, nil)
 		defer file.Close()
 	}
