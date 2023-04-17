@@ -90,6 +90,8 @@ func PrepareConfig() *Config {
 		webFendrMode = gin.DebugMode
 	}
 
+	log.Info("WebFendr mode: ", webFendrMode)
+
 	return &Config{
 		Auth0ClientId:             GetEnv("AUTH0_CLIENT_ID"),
 		Auth0ClientSecret:         GetEnv("AUTH0_CLIENT_SECRET"),
