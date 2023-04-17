@@ -8,7 +8,6 @@ import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	log "github.com/sirupsen/logrus"
-	"mime"
 	"net/http"
 	"path/filepath"
 	"webfendr/authenticator"
@@ -58,19 +57,6 @@ func Router(auths *authenticator.Authenticators, cfg *config.Config, logger *log
 func main() {
 	// Load config
 	cfg := config.PrepareConfig()
-
-	// Let's fix some issues with mimetypes
-	mime.AddExtensionType(".js", "text/javascript")
-	mime.AddExtensionType(".min.js", "text/javascript")
-	mime.AddExtensionType(".css", "text/css")
-	mime.AddExtensionType(".min.css", "text/css")
-	mime.AddExtensionType(".html", "text/html")
-	mime.AddExtensionType(".woff", "font/woff")
-	mime.AddExtensionType(".woff2", "font/woff2")
-	mime.AddExtensionType(".png", "image/png")
-	mime.AddExtensionType(".jpg", "image/jpg")
-	mime.AddExtensionType(".jpeg", "image/jpeg")
-	mime.AddExtensionType(".ico", "image/vnd.microsoft.icon")
 
 	// Init logging
 	logrus := log.New()

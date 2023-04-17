@@ -35,15 +35,46 @@ func FileHandler(cfg *config.Config) gin.HandlerFunc {
 			return
 		}
 		fileReader := bufio.NewReader(file)
-		mimeType, err := mimetype.DetectFile(filePath)
 		ctx.DataFromReader(
 			http.StatusOK,
 			-1,
-			mimeType.String(),
+			detectMime(filePath),
 			fileReader, nil)
 		defer file.Close()
 	}
 
+}
+
+// Hack since mimetype package is stupid
+func detectMime(filePath string) string {
+	mimeType, err := mimetype.DetectFile(filePath)
+	if err != nil {
+		log.Error("Could not detect mime type for ", filePath)
+		return "text/plain"
+	}
+	mimeStr := mimeType.String()
+	if mimeStr == "text/plain" {
+		if strings.HasSuffix(filePath, ".css") {
+			return "text/css"
+		} else if strings.HasSuffix(filePath, ".js") {
+			return "text/javascript"
+		} else if strings.HasSuffix(filePath, ".html") {
+			return "text/html"
+		} else if strings.HasSuffix(filePath, ".woff") {
+			return "font/woff"
+		} else if strings.HasSuffix(filePath, ".woff2") {
+			return "font/woff2"
+		} else if strings.HasSuffix(filePath, ".png") {
+			return "image/png"
+		} else if strings.HasSuffix(filePath, ".jpg") {
+			return "image/jpg"
+		} else if strings.HasSuffix(filePath, ".jpeg") {
+			return "image/jpeg"
+		} else if strings.HasSuffix(filePath, ".ico") {
+			return "image/vnd.microsoft.icon"
+		}
+	}
+	return mimeStr
 }
 
 func createFilePath(cfg *config.Config, webFendrHost string, uri string) string {
