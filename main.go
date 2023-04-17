@@ -34,7 +34,7 @@ func IsAuthenticated(cfg *config.Config) gin.HandlerFunc {
 	}
 }
 
-func Router(auths *authenticator.Authenticators, cfg *config.Config, logger *log.Logger) *gin.Engine {
+func Router(auths *authenticator.Authenticators, cfg *config.Config) *gin.Engine {
 	router := gin.New()
 	//router.Use(ginLogrus.Logger(logger), gin.Recovery(), gzip.Gzip(gzip.DefaultCompression))
 	router.Use(gin.Recovery(), gzip.Gzip(gzip.DefaultCompression))
@@ -59,11 +59,10 @@ func main() {
 	cfg := config.PrepareConfig()
 
 	// Init logging
-	logrus := log.New()
 	if cfg.WebFendrMode == gin.ReleaseMode {
-		logrus.SetFormatter(&log.JSONFormatter{})
+		log.SetFormatter(&log.JSONFormatter{})
 	} else {
-		logrus.SetFormatter(&log.TextFormatter{})
+		log.SetFormatter(&log.TextFormatter{})
 	}
 	gin.SetMode(cfg.WebFendrMode)
 
@@ -77,13 +76,13 @@ func main() {
 	go storage.Syncer(ctx, cfg)
 
 	// Load Gin routes
-	rtr := Router(auths, cfg, logrus)
+	rtr := Router(auths, cfg)
 
 	// Create server address
 	addr := fmt.Sprintf("0.0.0.0:%d", cfg.Port)
 
 	// Start http server
-	log.Info("Listening on ", addr)
+	log.Info("Listening on host ", addr)
 	if err := http.ListenAndServe(addr, rtr); err != nil {
 		log.Fatalf("There was an error with the http server: %v", err)
 	}
