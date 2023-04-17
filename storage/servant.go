@@ -55,13 +55,13 @@ func detectMime(filePath string) string {
 		return "text/plain"
 	}
 	mimeStr := mimeType.String()
-	if mimeStr == "text/plain" {
+	if strings.Contains(mimeStr, "text/plain") {
 		if strings.HasSuffix(filePath, ".css") {
-			return "text/css"
+			return "text/css; charset=utf-8"
 		} else if strings.HasSuffix(filePath, ".js") {
-			return "text/javascript"
+			return "text/javascript; charset=utf-8"
 		} else if strings.HasSuffix(filePath, ".html") {
-			return "text/html"
+			return "text/html; charset=utf-8"
 		} else if strings.HasSuffix(filePath, ".woff") {
 			return "font/woff"
 		} else if strings.HasSuffix(filePath, ".woff2") {
