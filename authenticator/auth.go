@@ -58,7 +58,7 @@ func NewAuthenticator(ctx *gin.Context, cfg *config.Config) (*Authenticator, err
 		return nil, err
 	}
 
-	log.Error("Creating authenticator with ", CreateCallbackUrl(ctx, cfg))
+	log.Info("Creating authenticator with ", CreateCallbackUrl(ctx, cfg))
 	conf := oauth2.Config{
 		ClientID:     cfg.Auth0ClientId,
 		ClientSecret: cfg.Auth0ClientSecret,

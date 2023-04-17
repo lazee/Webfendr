@@ -39,6 +39,7 @@ func FindDomains(cfg *config.Config) []string {
 
 func IndexHandler(cfg *config.Config) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
+
 		if ctx.Request.Host == cfg.WebFendrHost {
 			ctx.Header("Cache-Control", "no-cache")
 			ctx.HTML(http.StatusOK, filepath.Join(cfg.WebFolder, "webfendr.html"), gin.H{
