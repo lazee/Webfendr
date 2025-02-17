@@ -48,6 +48,7 @@ This is the default and recommended way of running WebFendr in production.
 
 ## Configuration
 
+Coming soon...
 
 ## Resources
 
